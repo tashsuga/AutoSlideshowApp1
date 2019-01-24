@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             cursor.close()
 
             */
-
+/*
             val resolver = this.contentResolver
             this.cursor = resolver.query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, // データの種類
@@ -90,7 +90,16 @@ class MainActivity : AppCompatActivity() {
                 null, // フィルタ用パラメータ
                 null // ソート (null ソートなし)
             )
+*/
 
+            val resolver = contentResolver
+            this.cursor = resolver.query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, // データの種類
+                null, // 項目(null = 全項目)
+                null, // フィルタ条件(null = フィルタなし)
+                null, // フィルタ用パラメータ
+                null // ソート (null ソートなし)
+            )
         }
 
 
