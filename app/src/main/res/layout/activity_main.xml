@@ -40,7 +40,7 @@
         <Button
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="一時停止"
+                android:text="戻る"
                 android:id="@+id/pause_button"/>
 
         <Button

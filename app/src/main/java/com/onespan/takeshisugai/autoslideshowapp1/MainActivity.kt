@@ -27,8 +27,7 @@ class MainActivity : AppCompatActivity() {
     private var mHandler = Handler()
 
 
-
-   private var cursor: Cursor? = null
+    private var cursor: Cursor? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,46 +50,11 @@ class MainActivity : AppCompatActivity() {
             getContentsInfo()
         }
 
-
+        /*
         start_button.setOnClickListener {
 
             //getContentsInfo()
 
-
-            /*
-            // 画像の情報を取得する
-            val resolver = contentResolver
-            val cursor = resolver.query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, // データの種類
-                null, // 項目(null = 全項目)
-                null, // フィルタ条件(null = フィルタなし)
-                null, // フィルタ用パラメータ
-                null // ソート (null ソートなし)
-            )
-            */
-
-            /*
-            if (cursor.moveToNext()) {
-                // indexからIDを取得し、そのIDから画像のURIを取得する
-                val fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID)
-                val id = cursor.getLong(fieldIndex)
-                val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-
-                imageView.setImageURI(imageUri)
-            }
-            cursor.close()
-
-            */
-/*
-            val resolver = this.contentResolver
-            this.cursor = resolver.query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, // データの種類
-                null, // 項目(null = 全項目)
-                null, // フィルタ条件(null = フィルタなし)
-                null, // フィルタ用パラメータ
-                null // ソート (null ソートなし)
-            )
-*/
 
             val resolver = contentResolver
             this.cursor = resolver.query(
@@ -101,48 +65,58 @@ class MainActivity : AppCompatActivity() {
                 null // ソート (null ソートなし)
             )
         }
+*/
 
+        start_button.setOnClickListener {
+            if (cursor!!.moveToNext()) {
+            } else {
+                cursor!!.moveToFirst()
+            }
+            // indexからIDを取得し、そのIDから画像のURIを取得する
+            val fieldIndex = cursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+            val id = cursor!!.getLong(fieldIndex)
+            val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+            imageView.setImageURI(imageUri)
+        }
 
+        pause_button.setOnClickListener {
+        if (cursor!!.moveToFirst()) {
+        } else {
+            cursor!!.moveToNext()
+        }
+        // indexからIDを取得し、そのIDから画像のURIを取得する
+        val fieldIndex = cursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+        val id = cursor!!.getLong(fieldIndex)
+        val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+        imageView.setImageURI(imageUri)
     }
 
 
 
 
-
-    /*
-      start_button.setOnClickListener {
-          if (mTimer == null){
-              mTimer = Timer()
-              mTimer!!.schedule(object : TimerTask() {
-                  override fun run() {
-                      mTimerSec += 0.1
-                      mHandler.post {
-                          timer.text = String.format("%.1f", mTimerSec)
-                      }
-                  }
-              }, 100, 100) // 最初に始動させるまで 100ミリ秒、ループの間隔を 100ミリ秒 に設定
-          }
-      }
+    }
 
 
+    private fun getContentsInfo() {
+        val resolver = this.contentResolver
+        this.cursor = resolver.query(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, // データの種類
+            null, // 項目(null = 全項目)
+            null, // フィルタ条件(null = フィルタなし)
+            null, // フィルタ用パラメータ
+            null // ソート (null ソートなし)
+        )
 
-      pause_button.setOnClickListener{
-          if (mTimer != null) {
-              mTimer!!.cancel()
-              mTimer = null
-          }
-      }
+        if (cursor!!.moveToFirst()) {
+            // indexからIDを取得し、そのIDから画像のURIを取得する
+            val fieldIndex = cursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+            val id = cursor!!.getLong(fieldIndex)
+            val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
 
-      reset_button.setOnClickListener{
-          mTimerSec = 0.0
-          timer.text = String.format("%.1f", mTimerSec)
-      }
+            imageView.setImageURI(imageUri)
+        }
 
-
-
-      }
-      */
-
+/*
     private fun getContentsInfo() {
 
         // 画像の情報を取得する
@@ -155,23 +129,10 @@ class MainActivity : AppCompatActivity() {
             null // ソート (null ソートなし)
         )
 
-        // added
-       // cursor.moveToNext()
+   */
 
-        /*
-        if (cursor!!.moveToFirst()) {
-            do {
-                // indexからIDを取得し、そのIDから画像のURIを取得する
-                val fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID)
-                val id = cursor.getLong(fieldIndex)
-                val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
 
-                Log.d("ANDROID", "URI : " + imageUri.toString())
-            } while (cursor.moveToNext())
-        }
-
-        */
-
+/*
 
         if (cursor.moveToFirst()) {
             // indexからIDを取得し、そのIDから画像のURIを取得する
@@ -190,10 +151,14 @@ class MainActivity : AppCompatActivity() {
         cursor.close()
     }
 
+*/
 
-    override fun onDestroy() {
-        super.onDestroy()
+         fun onDestroy() {
+            super.onDestroy()
 
-        cursor?.close()
+            cursor?.close()
+        }
     }
+
 }
+
