@@ -3,6 +3,7 @@ package com.onespan.takeshisugai.autoslideshowapp1
 import android.Manifest
 import android.content.ContentUris
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +25,10 @@ class MainActivity : AppCompatActivity() {
     private var mTimerSec = 0.0
 
     private var mHandler = Handler()
+
+
+
+   private var cursor: Cursor? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +56,8 @@ class MainActivity : AppCompatActivity() {
 
             //getContentsInfo()
 
+
+            /*
             // 画像の情報を取得する
             val resolver = contentResolver
             val cursor = resolver.query(
@@ -60,7 +67,9 @@ class MainActivity : AppCompatActivity() {
                 null, // フィルタ用パラメータ
                 null // ソート (null ソートなし)
             )
+            */
 
+            /*
             if (cursor.moveToNext()) {
                 // indexからIDを取得し、そのIDから画像のURIを取得する
                 val fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID)
@@ -70,6 +79,17 @@ class MainActivity : AppCompatActivity() {
                 imageView.setImageURI(imageUri)
             }
             cursor.close()
+
+            */
+
+            val resolver = this.contentResolver
+            this.cursor = resolver.query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, // データの種類
+                null, // 項目(null = 全項目)
+                null, // フィルタ条件(null = フィルタなし)
+                null, // フィルタ用パラメータ
+                null // ソート (null ソートなし)
+            )
 
         }
 
@@ -161,4 +181,10 @@ class MainActivity : AppCompatActivity() {
         cursor.close()
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        cursor?.close()
+    }
 }
