@@ -46,7 +46,7 @@
         <Button
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="リセット"
+                android:text="再生/停止"
                 android:id="@+id/reset_button"/>
     </LinearLayout>
     <ImageView
