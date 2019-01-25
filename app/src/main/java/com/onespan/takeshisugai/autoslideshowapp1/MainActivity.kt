@@ -56,6 +56,24 @@ class MainActivity : AppCompatActivity() {
 
         start_button.setOnClickListener {
 
+            val requestCode = 0
+            val grantResults: IntArray
+
+            when (requestCode) {
+                PERMISSIONS_REQUEST_CODE -> {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        Log.d("ANDROID", "許可された")
+                    } else {
+                        Log.d("ANDROID", "許可されなかった")
+
+                        // 25th/ Jab.
+                        // super.onDestroy()
+                        finish()
+
+                    }
+                }
+            }
+
 
             if (cursor!!.moveToNext()) {
             } else {
@@ -89,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                 mTimer = Timer()
                 mTimer!!.schedule(object : TimerTask() {
                     override fun run() {
-                        mTimerSec += 0.1
+                       // mTimerSec += 0.1
                         mHandler.post {
 
                             // timer.text = String.format("%.1f", mTimerSec)
@@ -119,6 +137,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+// 毛猛
+
         override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
             when (requestCode) {
                 PERMISSIONS_REQUEST_CODE ->
@@ -126,6 +146,11 @@ class MainActivity : AppCompatActivity() {
                         Log.d("ANDROID", "許可された")
                     } else {
                         Log.d("ANDROID", "許可されなかった")
+
+                        // 25th/ Jab.
+                        // super.onDestroy()
+                        finish()
+
                     }
             }
         }
