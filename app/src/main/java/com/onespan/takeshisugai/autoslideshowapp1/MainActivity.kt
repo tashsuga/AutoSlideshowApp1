@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         start_button.setOnClickListener {
 
+            /*
             val requestCode = 0
             val grantResults: IntArray
 
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-
+   */
 
             if (cursor!!.moveToNext()) {
             } else {
