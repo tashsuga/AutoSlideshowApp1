@@ -145,6 +145,7 @@ class MainActivity : AppCompatActivity() {
                 PERMISSIONS_REQUEST_CODE ->
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         Log.d("ANDROID", "許可された")
+                        getContentsInfo()
                     } else {
                         Log.d("ANDROID", "許可されなかった")
 
