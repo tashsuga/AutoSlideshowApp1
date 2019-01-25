@@ -94,6 +94,20 @@ class MainActivity : AppCompatActivity() {
 
                             // timer.text = String.format("%.1f", mTimerSec)
                             // ここにProcedureを記載。
+
+                           // if (cursor!!.moveToNext()) {
+                           // } else {
+                           //     cursor!!.moveToFirst()
+                           // }
+
+
+                            // indexからIDを取得し、そのIDから画像のURIを取得する
+                            val fieldIndex = cursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+                            val id = cursor!!.getLong(fieldIndex)
+                            val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+                            imageView.setImageURI(imageUri)
+
+                            // ここまで
                         }
                     }
                 }, 20000, 20000) // 最初に始動させるまで 100ミリ秒、ループの間隔を 100ミリ秒 に設定
