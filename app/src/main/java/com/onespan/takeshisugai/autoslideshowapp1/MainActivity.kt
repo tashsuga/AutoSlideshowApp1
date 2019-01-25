@@ -80,16 +80,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         reset_button.setOnClickListener {
+
+
             if (mTimer == null) {
                 mTimer = Timer()
                 mTimer!!.schedule(object : TimerTask() {
                     override fun run() {
                         mTimerSec += 0.1
                         mHandler.post {
-                            timer.text = String.format("%.1f", mTimerSec)
+
+                            // timer.text = String.format("%.1f", mTimerSec)
+                            // ここにProcedureを記載。
                         }
                     }
                 }, 20000, 20000) // 最初に始動させるまで 100ミリ秒、ループの間隔を 100ミリ秒 に設定
+            }
+            else
+            {
+                // indexからIDを取得し、そのIDから画像のURIを取得する
+                val fieldIndex = cursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+                val id = cursor!!.getLong(fieldIndex)
+                val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+                imageView.setImageURI(imageUri)
+
             }
         }
         /*
